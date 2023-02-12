@@ -39,7 +39,7 @@
 
 #Step 4
 import random
-from  day_7.hangman_stages import stages
+from  day_7.hangman_extras import stages, logo, word_list
 
 end_of_game = False
 word_list = ["ardvark", "baboon", "camel"]
