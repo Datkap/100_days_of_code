@@ -11,6 +11,7 @@ def ask_for_guess():
 
 
 def play_guess_the_number():
+    print(logo)
     number_to_be_guessed = random.randint(1, 101)
 
     game_level = input('What game level would you like to play? Type in "hard" or "easy"')
