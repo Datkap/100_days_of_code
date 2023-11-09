@@ -1,4 +1,4 @@
-coffee_emoji = "☕"
+coffee_emoji = ""
 
 MENU = {
     "espresso": {
