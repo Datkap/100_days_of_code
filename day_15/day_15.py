@@ -1,5 +1,4 @@
-from day_15.utils import MENU
-
+from day_15.utils import MENU, logo
 
 def run_coffee_machine():
     coins_in_machine = {
@@ -20,11 +19,12 @@ def run_coffee_machine():
     user_action = ''
 
     while user_action != 'off':
+        print(logo)
         display_menu()
         user_action = ask_user_for_action()
 
-        if user_action == 'print':
-            print_report(resources, profit)
+        if user_action == 'report':
+            print_report(resources, profit, coins_in_machine)
         elif user_action in ['espresso', 'latte', 'cappuccino']:
             sufficient_ingredients, missing_ingredient = check_resources_sufficient(available_menu, resources,
                                                                                     user_action)
@@ -37,7 +37,7 @@ def run_coffee_machine():
             else:
                 print(f"Sorry, there is not enough {missing_ingredient} to prepare selected coffee.")
         elif user_action == 'off':
-            pass
+            break
         else:
             print("Something went wrong. Try again...")
 
@@ -51,7 +51,7 @@ def display_menu():
         - espresso
         - latte
         - cappuccino
-    2. To print report type in 'print'.
+    2. To print report type in 'report'.
     3. To switch machine off type in 'off'.
     """)
 
@@ -64,12 +64,13 @@ def ask_user_for_action():
     return user_choice
 
 
-def print_report(current_resources_balance, current_profit):
+def print_report(current_resources_balance, current_profit, coin_balance):
     print(f"""
     Water: {current_resources_balance['water']}ml
     Milk: {current_resources_balance['milk']}ml
     Coffee: {current_resources_balance['coffee']}g
-    Money: ${current_profit}
+    Coins: {coin_balance}
+    Money in total: ${current_profit}
     """)
 
 
