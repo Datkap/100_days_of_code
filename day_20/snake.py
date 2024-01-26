@@ -6,13 +6,13 @@ class Snake:
         self.snake_body = []
         self.starting_x = 0
 
-        for i in range(3):
+        for i in range(20):
             snake_piece = Turtle(shape="square")
             snake_piece.resizemode("user")
-            snake_piece.shapesize(0.25, 0.25, 3)
+            snake_piece.shapesize(0.25, 0.25, 5)
             snake_piece.color('white')
             snake_piece.penup()
-            snake_piece.speed(0)
+            # snake_piece.speed(0)
             snake_piece.goto(x=self.starting_x, y=0)
             self.snake_body.append(snake_piece)
             self.starting_x -= 5
@@ -40,11 +40,19 @@ class Snake:
     def grow(self):
         snake_piece = Turtle(shape="square")
         snake_piece.resizemode("user")
-        snake_piece.shapesize(0.25, 0.25, 1)
+        snake_piece.shapesize(0.25, 0.25, 5)
         snake_piece.color('white')
         snake_piece.penup()
-        snake_piece.speed(0)
+        # snake_piece.speed(0)
         snake_piece.goto(self.snake_body[-1].pos())
         self.snake_body.append(snake_piece)
         self.snake_size = len(self.snake_body)
 
+    def body_hit(self):
+        return self.snake_head.pos() in [snake_piece.pos() for snake_piece in self.snake_body[1:]]
+
+    def wall_hit(self, board_width, board_height):
+        x_position_min, x_position_max = int((board_width / 2) * (-1)), int(board_width / 2)
+        y_position_min, y_position_max = int((board_height / 2) * (-1)), int(board_height / 2)
+        return self.snake_head.xcor() in [x_position_min, x_position_max] or \
+               self.snake_head.ycor() in [y_position_min, y_position_max]
