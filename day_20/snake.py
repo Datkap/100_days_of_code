@@ -21,16 +21,20 @@ class Snake:
         self.snake_size = len(self.snake_body)
 
     def turn_left(self):
-        self.snake_head.seth(180)
+        if self.snake_head.heading() != 0:
+            self.snake_head.seth(180)
 
     def turn_right(self):
-        self.snake_head.seth(0)
+        if self.snake_head.heading() != 180:
+            self.snake_head.seth(0)
 
     def turn_up(self):
-        self.snake_head.seth(90)
+        if self.snake_head.heading() != 270:
+            self.snake_head.seth(90)
 
     def turn_down(self):
-        self.snake_head.seth(270)
+        if self.snake_head.heading() != 90:
+            self.snake_head.seth(270)
 
     def move(self, speed):
         for snake_piece in range(len(self.snake_body) - 1, 0, -1):
@@ -54,5 +58,6 @@ class Snake:
     def wall_hit(self, board_width, board_height):
         x_position_min, x_position_max = int((board_width / 2) * (-1)), int(board_width / 2)
         y_position_min, y_position_max = int((board_height / 2) * (-1)), int(board_height / 2)
-        return self.snake_head.xcor() in [x_position_min, x_position_max] or \
-               self.snake_head.ycor() in [y_position_min, y_position_max]
+        return self.snake_head.xcor() < x_position_min or self.snake_head.xcor() > x_position_max or \
+               self.snake_head.ycor() < y_position_min or self.snake_head.ycor() > y_position_max
+

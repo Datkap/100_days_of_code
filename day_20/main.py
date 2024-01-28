@@ -56,6 +56,9 @@ while game_on:
         score.display_score()
         game_over()
 
+    x_position_min, x_position_max = int((width / 2) * (-1)), int(width / 2)
+    y_position_min, y_position_max = int((height / 2) * (-1)), int(height / 2)
+
     sleep(0.01)
     screen.update()
 
